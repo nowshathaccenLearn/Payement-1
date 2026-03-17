@@ -103,14 +103,37 @@ document.addEventListener('DOMContentLoaded', () => {
         state,
         domain
       },
-      handler: function (response) {
-        // Webhook will send the receipt email after verification.
-        showMessage('Payment successful. Receipt will be emailed shortly.', 'success');
-        confirmSection?.classList.add('hidden');
-        payToggleButton.disabled = false;
+      handler: async function (response) {
         try {
-          localStorage.removeItem(UPI_RETURN_FLAG);
-        } catch {}
+          const verifyRes = await fetch('/verify-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            })
+          });
+
+          const verifyData = await verifyRes.json().catch(() => ({}));
+          if (!verifyRes.ok || !verifyData?.success) {
+            showMessage(verifyData?.message || 'Payment verification failed. Please contact support.', 'error');
+            payToggleButton.disabled = false;
+            return;
+          }
+
+          // Webhook will email receipt after capture confirmation.
+          showMessage('Payment verified successfully. Receipt will be emailed shortly.', 'success');
+          confirmSection?.classList.add('hidden');
+          payToggleButton.disabled = false;
+          try {
+            localStorage.removeItem(UPI_RETURN_FLAG);
+          } catch {}
+        } catch (err) {
+          console.error(err);
+          showMessage('Network error during verification. Please contact support if amount was deducted.', 'error');
+          payToggleButton.disabled = false;
+        }
       },
       modal: {
         ondismiss: function () {

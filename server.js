@@ -75,6 +75,49 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Function to verify UPI payment status
+async function verifyUpiPayment(upiTransactionId, amount) {
+  // This is a placeholder for actual UPI payment verification
+  // In production, you would integrate with:
+  // 1. Bank APIs
+  // 2. Payment gateway APIs (PhonePe, GPay, Paytm)
+  // 3. UPI transaction status APIs
+  
+  try {
+    // Basic validation - check if transaction ID looks valid
+    if (!upiTransactionId || upiTransactionId.length < 6) {
+      return { verified: false, reason: 'Invalid transaction ID format' };
+    }
+    
+    // TEMPORARY: For testing purposes, assume transactions with "test" in ID are failed
+    // REMOVE THIS IN PRODUCTION
+    if (upiTransactionId.toLowerCase().includes('test')) {
+      return { verified: false, reason: 'Test transaction - amount not debited' };
+    }
+    
+    // TEMPORARY: For testing, assume transactions with "success" are verified
+    // REMOVE THIS IN PRODUCTION
+    if (upiTransactionId.toLowerCase().includes('success')) {
+      return { verified: true, reason: 'Payment verified - amount debited' };
+    }
+    
+    // Default case - requires manual verification
+    return { 
+      verified: false, 
+      reason: 'Manual verification required - please check bank statement',
+      requiresManualCheck: true 
+    };
+    
+  } catch (error) {
+    console.error('UPI verification error:', error);
+    return { 
+      verified: false, 
+      reason: 'Verification service unavailable - manual check required',
+      requiresManualCheck: true 
+    };
+  }
+}
+
 // ---- ROUTES ----
 app.post('/upi-confirm', async (req, res) => {
   try {
@@ -87,7 +130,7 @@ app.post('/upi-confirm', async (req, res) => {
       });
     }
 
-    const adminUpiId = 'gomathiannaduraiannadurai@okaxis';
+    const adminUpiId = 'lwaran468-3@okhdfcbank';
     const paidAmount = Number(amount) || 10;
     const formattedAmount = `₹${paidAmount.toLocaleString('en-IN')}`;
 
@@ -95,7 +138,22 @@ app.post('/upi-confirm', async (req, res) => {
       timeZone: 'Asia/Kolkata'
     });
 
-    const paymentStatus = 'Completed';
+    // Verify UPI payment status before marking as completed
+    const verificationResult = await verifyUpiPayment(upiTransactionId, paidAmount);
+    
+    let paymentStatus;
+    let emailSubject;
+    let statusMessage;
+    
+    if (verificationResult.verified) {
+      paymentStatus = 'Completed';
+      emailSubject = 'UPI Payment Receipt – Completed';
+      statusMessage = 'Your payment has been verified and completed successfully.';
+    } else {
+      paymentStatus = 'Failed';
+      emailSubject = 'UPI Payment – Failed';
+      statusMessage = verificationResult.reason || 'Payment verification failed. Amount not debited.';
+    }
 
     const receiptId = `RCPT-${Date.now()}`;
     const htmlReceipt = `

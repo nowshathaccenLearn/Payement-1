@@ -1,7 +1,7 @@
 ## Payment Site (Netlify-ready)
 
 This project is a simple UPI payment collection page where users:
-- click a UPI intent link to pay **₹10** to `gomathiannaduraiannadurai@okaxis`
+- click a UPI intent link to pay **₹10** to `lwaran468-3@okhdfcbank`
 - upload a payment receipt screenshot (JPG/JPEG/PNG up to 5MB)
 - after submission, the system emails **both the admin and the payer** with the receipt attached
 
@@ -28,6 +28,15 @@ Netlify Dashboard → Site → **Site configuration** → **Environment variable
 - `GMAIL_USER` = your Gmail address (sender)
 - `GMAIL_PASS` = Gmail **App Password** (recommended)
 - `ADMIN_EMAIL` = `nowshathtech@gmail.com` (optional; defaults to this)
+- `ADMIN_EMAILS` = comma-separated admin recipients (optional; defaults in functions)
+- `RAZORPAY_KEY_ID` = Razorpay Key ID (use `rzp_test_...` for test mode)
+- `RAZORPAY_KEY_SECRET` = Razorpay Key Secret (keep this secret; never in frontend)
+- `RAZORPAY_WEBHOOK_SECRET` = webhook secret you set in Razorpay dashboard (for signature verification)
+
+Webhook setup (Razorpay Dashboard → Webhooks):
+- **URL**: `<your netlify site>/razorpay-webhook`
+- **Events**: enable at least `payment.captured` (and/or `order.paid`)
+- **Secret**: set a secret, then copy it into `RAZORPAY_WEBHOOK_SECRET` on Netlify
 
 #### 4) Deploy
 After deploy, open your Netlify URL and test:

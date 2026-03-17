@@ -23,4 +23,9 @@
   to = "/.netlify/functions/razorpay-webhook"
   status = 200
 
+[[redirects]]
+  from = "/verify-payment"
+  to = "/.netlify/functions/verify-payment"
+  status = 200
+
 

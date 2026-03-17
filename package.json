@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "netlify:dev": "netlify dev"
+    "netlify:dev": "netlify dev",
+    "test:server": "node test-server.js",
+    "test:e2e": "playwright test"
   },
   "keywords": [
     "payment",
@@ -27,6 +29,7 @@
     "razorpay": "^2.9.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "netlify-cli": "^24.2.0"
   }
 }
