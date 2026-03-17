@@ -60,7 +60,7 @@ exports.handler = async (event) => {
     });
   }
 
-  const adminUpiId = 'lwaran468-3@okhdfcbank';
+  const adminUpiId = 'lwaran468-2@okicici';
   const paidAmount = Number(amount) || 1;
   const formattedAmount = `₹${paidAmount.toLocaleString('en-IN')}`;
 

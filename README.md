@@ -1,7 +1,7 @@
 ## Payment Site (Netlify-ready)
 
 This project is a simple UPI payment collection page where users:
-- click a UPI intent link to pay **₹1** to `smartnowshath@okhdfcbank`
+- click a UPI intent link to pay **₹1** to `lwaran468-2@okicici`
 - upload a payment receipt screenshot (JPG/JPEG/PNG up to 5MB)
 - after submission, the system emails **both the admin and the payer** with the receipt attached
 
