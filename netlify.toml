@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# Optional: local dev proxy (netlify dev)
+[[redirects]]
+  from = "/submit-payment"
+  to = "/.netlify/functions/submit-payment"
+  status = 200
+
+[[redirects]]
+  from = "/upi-confirm"
+  to = "/.netlify/functions/upi-confirm"
+  status = 200
+
+

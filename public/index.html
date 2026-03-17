@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accenlearn – Skill Booster Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/accenlearn-logo.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-gradient"></div>
+
+  <div class="container">
+    <div class="frame">
+      <div class="frame-tab">
+        <img class="frame-logo" src="images/accenlearn-logo.png" alt="Accenlearn logo" />
+      </div>
+
+      <div class="card">
+      <div id="step-company" class="step">
+        <div class="reg-card">
+          <div class="reg-hero">
+            <div class="reg-hero-tag">SKILL BOOSTER FULL REGISTRATION</div>
+            <p class="reg-subtitle">Complete your registration by providing the required details.</p>
+          </div>
+
+          <div class="reg-body">
+            <div class="reg-steps" role="list" aria-label="Registration steps">
+              <div class="reg-step is-active" role="listitem">
+                <div class="reg-step-dot">1</div>
+                <div class="reg-step-label">Details</div>
+              </div>
+              <div class="reg-step-line" aria-hidden="true"></div>
+              <div class="reg-step" role="listitem">
+                <div class="reg-step-dot is-idle">2</div>
+                <div class="reg-step-label is-idle">Payment</div>
+              </div>
+            </div>
+
+            <div class="reg-details">
+              <div class="reg-row">
+                <div class="reg-key">Program Type</div>
+                <div class="reg-val">SKILL BOOSTER PROGRAM</div>
+              </div>
+              <div class="reg-row">
+                <div class="reg-key">Enrollment Fee</div>
+                <div class="reg-val reg-price">INR 1/-</div>
+              </div>
+            </div>
+
+            <p class="reg-copy reg-copy-strong">
+              Complete the final step of beginning your upskilling journey now by making the payment for your chosen
+              program.
+            </p>
+
+            <p class="reg-copy">
+              Please provide the details in the form titled <strong>'Payment Details'</strong>.
+            </p>
+
+            <ul class="reg-list">
+              <li>Fill in your name, email address, and contact number.</li>
+              <li>Fill in your state you belong to.</li>
+            </ul>
+
+            <button id="next-button" type="button" class="btn reg-cta">
+              Proceed to Payment <span class="reg-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-payment" class="step hidden" aria-hidden="true">
+        <div class="pay-card">
+          <div class="pay-hero">
+            <button id="back-button" type="button" class="pay-back" aria-label="Go back">←</button>
+            <div class="pay-hero-title">Payment Details</div>
+          </div>
+
+          <div class="pay-body">
+            <div class="pay-steps" role="list" aria-label="Payment steps">
+              <div class="pay-step is-done" role="listitem">
+                <div class="pay-step-check" aria-hidden="true">✓</div>
+                <div class="pay-step-text">Details</div>
+              </div>
+              <div class="pay-step-line" aria-hidden="true"></div>
+              <div class="pay-step is-active" role="listitem">
+                <div class="pay-step-dot">2</div>
+                <div class="pay-step-text">Payment</div>
+              </div>
+            </div>
+
+            <div class="pay-amount">
+              <div class="pay-amount-left">
+                <div class="pay-amount-label">AMOUNT PAYABLE</div>
+                <div class="pay-amount-value">₹1</div>
+                <div class="pay-amount-sub"></div>
+              </div>
+              <div class="pay-amount-icon" aria-hidden="true">💳</div>
+            </div>
+
+            <form id="payment-details-form" class="pay-form">
+              <div class="pay-field">
+                <label for="payerName">NAME <span class="req">*</span></label>
+                <input id="payerName" name="payerName" type="text" placeholder="Enter your name" required />
+              </div>
+
+              <div class="pay-field">
+                <label for="payerEmail">EMAIL ADDRESS <span class="req">*</span></label>
+                <input id="payerEmail" name="payerEmail" type="email" placeholder="you@email.com" required />
+              </div>
+
+              <div class="pay-field">
+                <label for="payerPhone">PHONE NUMBER <span class="req">*</span></label>
+                <div class="pay-phone">
+                  <input class="pay-code" id="countryCode2" name="countryCode2" type="text" value="IN +91" readonly />
+                  <input class="pay-num" id="payerPhone" name="payerPhone" type="tel" inputmode="numeric" placeholder="9876543210" required />
+                </div>
+              </div>
+
+              <div class="pay-field">
+                <label for="payerState">STATE <span class="req">*</span></label>
+                <input
+                  id="payerState"
+                  name="payerState"
+                  type="text"
+                  list="stateList"
+                  placeholder="Start typing to search (e.g. Maharashtra)"
+                  autocomplete="off"
+                  required
+                />
+                <datalist id="stateList">
+                  <option value="Andhra Pradesh"></option>
+                  <option value="Arunachal Pradesh"></option>
+                  <option value="Assam"></option>
+                  <option value="Bihar"></option>
+                  <option value="Chhattisgarh"></option>
+                  <option value="Goa"></option>
+                  <option value="Gujarat"></option>
+                  <option value="Haryana"></option>
+                  <option value="Himachal Pradesh"></option>
+                  <option value="Jharkhand"></option>
+                  <option value="Karnataka"></option>
+                  <option value="Kerala"></option>
+                  <option value="Madhya Pradesh"></option>
+                  <option value="Maharashtra"></option>
+                  <option value="Manipur"></option>
+                  <option value="Meghalaya"></option>
+                  <option value="Mizoram"></option>
+                  <option value="Nagaland"></option>
+                  <option value="Odisha"></option>
+                  <option value="Punjab"></option>
+                  <option value="Rajasthan"></option>
+                  <option value="Sikkim"></option>
+                  <option value="Tamil Nadu"></option>
+                  <option value="Telangana"></option>
+                  <option value="Tripura"></option>
+                  <option value="Uttar Pradesh"></option>
+                  <option value="Uttarakhand"></option>
+                  <option value="West Bengal"></option>
+                </datalist>
+              </div>
+
+              <div class="pay-field">
+                <label for="payerDomain">DOMAIN / INTEREST <span class="req">*</span></label>
+                <select id="payerDomain" name="payerDomain" required>
+                  <option value="" selected disabled>-- Select Domain --</option>
+                  <option>AI Engineering</option>
+                  <option>Data Science</option>
+                  <option>Data Analytics</option>
+                  <option>Full Stack Software Developer</option>
+                  <option>Data Structures and Algorithms (DSA)</option>
+                  <option>Cybersecurity</option>
+                  <option>DevOps</option>
+                  <option>Machine Learning</option>
+                  <option>SQL</option>
+                  <option>Cloud Fundamentals</option>
+                  <option>Human Resource</option>
+                  <option>Business Analytics</option>
+                  <option>Finance</option>
+                  <option>Stock Market</option>
+                  <option>Digital Marketing</option>
+                  <option>Psychology</option>
+                </select>
+              </div>
+
+              <div class="pay-upi">
+                <div class="pay-upi-label">UPI ID</div>
+                <a class="pay-upi-id" href="upi://pay?pa=lwaran468-3@okhdfcbank&pn=Accenlearn%20Payment&am=1&cu=INR">
+                  lwaran468-3@okhdfcbank
+                </a>
+              </div>
+
+              <button id="pay-toggle-button" type="button" class="btn pay-cta">
+                Pay Now <span class="reg-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <div id="confirm-section" class="hidden">
+                <div class="pay-field">
+                  <label for="upiTxnId">UPI TRANSACTION ID <span class="req">*</span></label>
+                  <input
+                    id="upiTxnId"
+                    name="upiTxnId"
+                    type="text"
+                  placeholder="Enter Transaction ID"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="btn pay-cta">
+                  Submit <span class="reg-arrow" aria-hidden="true">→</span>
+                </button>
+              </div>
+            </form>
+
+            <div id="message" class="message"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

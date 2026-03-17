@@ -1,0 +1,876 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap");
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  color: #0f172a;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.frame {
+  position: relative;
+  width: min(720px, 92vw);
+  min-height: min(760px, 86vh);
+  border: 2px solid rgba(15, 23, 42, 0.7);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 34px 18px 18px;
+}
+
+.frame-tab {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 2px solid rgba(15, 23, 42, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frame-logo {
+  display: block;
+  max-width: min(220px, 60vw);
+  max-height: 64px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.frame .reg-card,
+.frame .pay-card {
+  margin: 0 auto;
+  width: min(620px, 100%);
+}
+
+.background-gradient {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(37, 99, 235, 0.22) 0, transparent 55%),
+    radial-gradient(circle at 85% 22%, rgba(99, 102, 241, 0.18) 0, transparent 55%),
+    radial-gradient(circle at 55% 92%, rgba(14, 165, 233, 0.12) 0, transparent 60%);
+  opacity: 1;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.container {
+  max-width: 620px;
+  width: 100%;
+}
+
+.container.company-layout {
+  max-width: 620px;
+}
+
+.card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: inherit;
+}
+
+.card.company-mode {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ---- STEP 1 (Details) – reference-style card ---- */
+.reg-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(2, 6, 23, 0.14);
+  overflow: hidden;
+}
+
+.pay-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(2, 6, 23, 0.14);
+  overflow: hidden;
+}
+
+.floating-logo {
+  display: none;
+}
+
+.floating-logo-img {
+  display: none;
+}
+
+.reg-hero {
+  position: relative;
+  padding: 44px 16px 18px;
+  color: #ffffff;
+  background: radial-gradient(circle at 80% 55%, rgba(255, 255, 255, 0.12) 0, transparent 42%),
+    radial-gradient(circle at 85% 55%, rgba(255, 255, 255, 0.08) 0, transparent 55%),
+    linear-gradient(135deg, #0b1f6d 0%, #0f2da8 55%, #1436c4 100%);
+}
+
+.reg-hero::after {
+  content: "";
+  position: absolute;
+  inset: -40px -60px -40px auto;
+  width: 280px;
+  background: radial-gradient(circle at 45% 50%, rgba(255, 255, 255, 0.12) 0, transparent 62%);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.reg-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.reg-logo-wrap {
+  width: auto;
+  height: auto;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.18);
+  padding: 8px 10px;
+}
+
+.reg-logo {
+  width: min(260px, 70vw);
+  height: 48px;
+  object-fit: contain;
+}
+
+.reg-hero-tag {
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 1000;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: clamp(0.86rem, 2.35vw, 1.02rem);
+  line-height: 1.2;
+  color: #0b1220;
+  margin: 8px 0 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.12);
+}
+
+.reg-brand-name {
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+.reg-brand-sub {
+  opacity: 0.92;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.reg-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #f59e0b;
+  color: rgba(2, 6, 23, 0.92);
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+.reg-title {
+  margin-top: 14px;
+  font-size: 2.05rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.reg-subtitle {
+  margin-top: 6px;
+  font-size: 1rem;
+  opacity: 0.92;
+  font-weight: 600;
+}
+
+.reg-body {
+  padding: 18px 20px 20px;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.reg-steps {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.reg-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-weight: 800;
+  color: #1d4ed8;
+}
+
+.reg-step-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.reg-step-dot.is-idle {
+  background: transparent;
+  border: 2px solid rgba(148, 163, 184, 0.6);
+  color: rgba(100, 116, 139, 0.95);
+}
+
+.reg-step-label.is-idle {
+  color: rgba(100, 116, 139, 0.95);
+}
+
+.reg-step-line {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+}
+
+.reg-details {
+  background: rgba(241, 245, 249, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  padding: 10px 12px;
+  margin: 14px 0 14px;
+}
+
+.reg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.reg-row:last-child {
+  border-bottom: none;
+}
+
+.reg-key {
+  color: rgba(71, 85, 105, 0.95);
+  font-weight: 500;
+}
+
+.reg-val {
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.reg-price {
+  color: #1d4ed8;
+  font-size: 1.1rem;
+}
+
+.reg-copy {
+  color: rgba(71, 85, 105, 0.98);
+  line-height: 1.6;
+  margin: 10px 0 14px;
+}
+
+.reg-copy-strong {
+  color: rgba(15, 23, 42, 0.98);
+  font-weight: 700;
+}
+
+.reg-copy strong {
+  color: rgba(15, 23, 42, 0.92);
+  font-weight: 900;
+}
+
+.reg-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.reg-list li {
+  position: relative;
+  padding-left: 26px;
+  color: rgba(15, 23, 42, 0.9);
+  font-weight: 600;
+}
+
+.reg-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f59e0b;
+  font-weight: 900;
+}
+
+.btn.reg-cta {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb, #60a5fa);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 1.05rem;
+  box-shadow: 0 16px 26px rgba(29, 78, 216, 0.28);
+}
+
+.reg-arrow {
+  display: inline-block;
+  transform: translateY(1px);
+  margin-left: 6px;
+}
+
+.pay-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px;
+  background: radial-gradient(circle at 80% 55%, rgba(255, 255, 255, 0.12) 0, transparent 42%),
+    radial-gradient(circle at 85% 55%, rgba(255, 255, 255, 0.08) 0, transparent 55%),
+    linear-gradient(135deg, #0b1f6d 0%, #0f2da8 55%, #1436c4 100%);
+  color: #ffffff;
+}
+
+.pay-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(2, 6, 23, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.pay-hero::after {
+  content: "";
+  position: absolute;
+  inset: -40px -60px -40px auto;
+  width: 280px;
+  background: radial-gradient(circle at 45% 50%, rgba(255, 255, 255, 0.12) 0, transparent 62%);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+.pay-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.pay-hero-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+.pay-body {
+  padding: 16px 16px 18px;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.pay-steps {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 14px;
+}
+
+.pay-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.pay-step.is-done {
+  color: #16a34a;
+}
+
+.pay-step.is-active {
+  color: #1d4ed8;
+}
+
+.pay-step-check {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.pay-step-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.pay-step-line {
+  height: 3px;
+  border-radius: 999px;
+  background: #16a34a;
+  opacity: 0.9;
+}
+
+.pay-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: rgba(250, 245, 236, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  border-radius: 16px;
+  padding: 14px 14px;
+  margin: 12px 0 14px;
+}
+
+.pay-amount-label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: rgba(71, 85, 105, 0.95);
+}
+
+.pay-amount-value {
+  font-size: 2.0rem;
+  font-weight: 1000;
+  color: #1d4ed8;
+  margin-top: 6px;
+  line-height: 1.05;
+}
+
+.pay-amount-sub {
+  margin-top: 4px;
+  color: rgba(71, 85, 105, 0.9);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.pay-amount-icon {
+  font-size: 1.8rem;
+  opacity: 0.9;
+}
+
+.pay-form {
+  display: grid;
+  gap: 12px;
+}
+
+.pay-upi {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1.5px dashed rgba(148, 163, 184, 0.65);
+  background: rgba(241, 245, 249, 0.75);
+}
+
+.pay-upi-label {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: rgba(71, 85, 105, 0.95);
+  white-space: nowrap;
+}
+
+.pay-upi-id {
+  font-weight: 900;
+  color: #1d4ed8;
+  text-decoration: none;
+  word-break: break-all;
+  text-align: right;
+}
+
+.pay-upi-id:hover {
+  text-decoration: underline;
+}
+
+.pay-field label {
+  display: block;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.92);
+  margin-bottom: 6px;
+}
+
+.req {
+  color: #ef4444;
+  font-weight: 1000;
+}
+
+.pay-field input,
+.pay-field select {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(148, 163, 184, 0.55);
+  background: #ffffff;
+  color: rgba(15, 23, 42, 0.92);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.pay-field input:focus,
+.pay-field select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.pay-phone {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+}
+
+.pay-code {
+  background: rgba(241, 245, 249, 0.9) !important;
+  color: rgba(71, 85, 105, 0.95) !important;
+  font-weight: 800;
+}
+
+.btn.pay-cta {
+  margin-top: 6px;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb, #60a5fa);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 16px 16px;
+  font-size: 1.05rem;
+  box-shadow: 0 16px 26px rgba(29, 78, 216, 0.28);
+}
+
+.step-header {
+  margin-bottom: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  margin: 0 auto 10px;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f9fafb;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.company-card {
+  background: rgba(2, 6, 23, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  padding: 14px 14px;
+  margin-bottom: 16px;
+}
+
+.company-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.company-row:last-child {
+  border-bottom: none;
+}
+
+.company-label {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  min-width: 110px;
+}
+
+.company-value {
+  font-size: 0.9rem;
+  color: #f3f4f6;
+  text-align: right;
+  font-weight: 600;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+label {
+  font-size: 0.8rem;
+  color: #e5e7eb;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(15, 23, 42, 0.75);
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5);
+  background: rgba(15, 23, 42, 0.92);
+}
+
+input[type="file"] {
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 2px 0 14px;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+}
+
+.amount-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.amount-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #a5b4fc;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease, opacity 0.14s ease;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1, #0ea5e9);
+  color: #f9fafb;
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.6);
+  margin-bottom: 10px;
+}
+
+.btn.secondary {
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  margin-top: 4px;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+.footer-actions {
+  margin-top: 10px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.7);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.8);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.info-text {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #a5b4fc;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.receipt-form {
+  margin-top: 10px;
+}
+
+.message {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  min-height: 18px;
+  text-align: center;
+}
+
+.message.success {
+  color: #4ade80;
+}
+
+.message.error {
+  color: #f97373;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .card {
+    padding: 20px 18px 22px;
+  }
+
+  .card.company-mode {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .amount-value {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  .frame {
+    width: 100%;
+    min-height: unset;
+    padding: 30px 12px 14px;
+  }
+
+  .frame-tab {
+    padding: 8px 10px;
+  }
+
+  .frame-logo {
+    max-width: min(200px, 70vw);
+    max-height: 56px;
+  }
+
+  .pay-body,
+  .reg-body {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .btn {
+    min-height: 48px;
+  }
+}
+
+
+
