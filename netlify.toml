@@ -13,4 +13,14 @@
   to = "/.netlify/functions/upi-confirm"
   status = 200
 
+[[redirects]]
+  from = "/create-order"
+  to = "/.netlify/functions/create-order"
+  status = 200
+
+[[redirects]]
+  from = "/razorpay-webhook"
+  to = "/.netlify/functions/razorpay-webhook"
+  status = 200
+
 

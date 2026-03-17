@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   backButton?.addEventListener('click', () => showStep('company'));
   showStep('company');
 
-  payToggleButton?.addEventListener('click', () => {
+  payToggleButton?.addEventListener('click', async () => {
     const name = document.getElementById('payerName')?.value?.trim() || '';
     const email = document.getElementById('payerEmail')?.value?.trim() || '';
     const phone = document.getElementById('payerPhone')?.value?.trim() || '';
@@ -46,25 +46,87 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const amount = 10;
-    const vpa = 'gomathiannaduraiannadurai@okaxis';
-    const upiUrl =
-      'upi://pay?' +
-      new URLSearchParams({
-        pa: vpa,
-        pn: name || 'Accenlearn Payment',
-        am: String(amount),
-        cu: 'INR'
-      }).toString();
 
-    confirmSection?.classList.remove('hidden');
-    confirmSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    showMessage('Opening your UPI app… After payment, enter the UPI Transaction ID and submit.', 'success');
+    if (typeof window.Razorpay !== 'function') {
+      showMessage('Payment system is still loading. Please wait 2 seconds and try again.', 'error');
+      return;
+    }
+
+    payToggleButton.disabled = true;
+    showMessage('Opening secure payment…', 'success');
+
+    let order;
+    try {
+      const response = await fetch('/create-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          state,
+          domain,
+          amount
+        })
+      });
+      order = await response.json();
+      if (!response.ok || !order?.success) {
+        showMessage(order?.message || 'Failed to start payment. Please try again.', 'error');
+        payToggleButton.disabled = false;
+        return;
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage('Network error while starting payment. Please try again.', 'error');
+      payToggleButton.disabled = false;
+      return;
+    }
+
+    const rzp = new window.Razorpay({
+      key: order.keyId,
+      order_id: order.orderId,
+      amount: order.amount,
+      currency: order.currency || 'INR',
+      name: 'Accenlearn',
+      description: 'Skill Booster Payment',
+      prefill: {
+        name,
+        email,
+        contact: phone
+      },
+      notes: {
+        name,
+        email,
+        phone,
+        state,
+        domain
+      },
+      handler: function (response) {
+        // Webhook will send the receipt email after verification.
+        showMessage('Payment successful. Receipt will be emailed shortly.', 'success');
+        confirmSection?.classList.add('hidden');
+        payToggleButton.disabled = false;
+        try {
+          localStorage.removeItem(UPI_RETURN_FLAG);
+        } catch {}
+      },
+      modal: {
+        ondismiss: function () {
+          showMessage('Payment was cancelled/closed. You can try again.', 'error');
+          payToggleButton.disabled = false;
+        }
+      }
+    });
 
     try {
-      localStorage.setItem(UPI_RETURN_FLAG, String(Date.now()));
-    } catch {}
-
-    window.location.href = upiUrl;
+      rzp.open();
+    } catch (err) {
+      console.error(err);
+      showMessage('Failed to open payment window. Please try again.', 'error');
+      payToggleButton.disabled = false;
+    }
   });
 
   const handlePotentialReturnFromUpi = () => {
@@ -84,9 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    confirmSection?.classList.remove('hidden');
-    confirmSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    showMessage('Welcome back. Please enter your UPI Transaction ID and submit to complete verification.', 'success');
+    // Legacy UPI-return UX is not used when Razorpay is enabled.
+    try {
+      localStorage.removeItem(UPI_RETURN_FLAG);
+    } catch {}
   };
 
   document.addEventListener('visibilitychange', () => {
@@ -113,11 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const upiTxnId = document.getElementById('upiTxnId')?.value?.trim() || '';
     const amount = 10;
 
-    if (!name || !email || !phone || !state || !domain || !upiTxnId) {
-      showMessage('Please fill all required fields before submitting.', 'error');
-      submitButton.disabled = false;
-      return;
-    }
+    // Manual UPI Transaction ID submit is deprecated when Razorpay is used.
+    showMessage('Please use the Pay Now button to complete payment. Receipt will be emailed after confirmation.', 'error');
+    submitButton.disabled = false;
+    return;
 
     try {
       const response = await fetch('/upi-confirm', {
