@@ -31,7 +31,7 @@ exports.handler = async (event) => {
   const {
     name,
     email,
-    amount = 1,
+    amount = 10,
     upiTransactionId,
     state,
     domain,

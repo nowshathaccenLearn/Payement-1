@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const amount = 1;
+    const amount = 10;
     const vpa = 'gomathiannaduraiannadurai@okaxis';
     const upiUrl =
       'upi://pay?' +
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = document.getElementById('payerState')?.value?.trim() || '';
     const domain = document.getElementById('payerDomain')?.value || '';
     const upiTxnId = document.getElementById('upiTxnId')?.value?.trim() || '';
-    const amount = 1;
+    const amount = 10;
 
     if (!name || !email || !phone || !state || !domain || !upiTxnId) {
       showMessage('Please fill all required fields before submitting.', 'error');

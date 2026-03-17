@@ -78,7 +78,7 @@ const transporter = nodemailer.createTransport({
 // ---- ROUTES ----
 app.post('/upi-confirm', async (req, res) => {
   try {
-    const { name, email, amount = 1, upiTransactionId, state, domain, phone } = req.body || {};
+    const { name, email, amount = 10, upiTransactionId, state, domain, phone } = req.body || {};
 
     if (!name || !email || !upiTransactionId) {
       return res.status(400).json({
@@ -88,7 +88,7 @@ app.post('/upi-confirm', async (req, res) => {
     }
 
     const adminUpiId = 'gomathiannaduraiannadurai@okaxis';
-    const paidAmount = Number(amount) || 1;
+    const paidAmount = Number(amount) || 10;
     const formattedAmount = `₹${paidAmount.toLocaleString('en-IN')}`;
 
     const paidAt = new Date().toLocaleString('en-IN', {
@@ -218,7 +218,7 @@ app.post('/submit-payment', (req, res) => {
     const receiptFilename = req.file.filename;
 
     // Prepare emails
-    const amount = '₹1';
+    const amount = '₹10';
 
     // Email 1 – Admin Notification
     const adminMailOptions = {

@@ -127,7 +127,7 @@ exports.handler = async (event) => {
     return json(400, { success: false, message: 'Only JPG/JPEG/PNG images are allowed.' });
   }
 
-  const amount = '₹1';
+  const amount = '₹10';
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
