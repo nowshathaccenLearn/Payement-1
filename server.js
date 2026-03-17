@@ -87,7 +87,7 @@ app.post('/upi-confirm', async (req, res) => {
       });
     }
 
-    const adminUpiId = 'lwaran468-2@okicici';
+    const adminUpiId = 'gomathiannaduraiannadurai@okaxis';
     const paidAmount = Number(amount) || 1;
     const formattedAmount = `₹${paidAmount.toLocaleString('en-IN')}`;
 

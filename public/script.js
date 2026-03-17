@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const amount = 1;
-    const vpa = 'lwaran468-2@okicici';
+    const vpa = 'gomathiannaduraiannadurai@okaxis';
     const upiUrl =
       'upi://pay?' +
       new URLSearchParams({
