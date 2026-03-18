@@ -1,14 +1,3 @@
-node_modules/
-.netlify/
-
-# secrets
-.env
-
-# uploads created by local Express server
-uploads/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
+<<<<<<< HEAD
+=======
+>>>>>>> origin/main
