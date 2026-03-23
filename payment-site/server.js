@@ -223,7 +223,7 @@ async function verifyUpiPayment(upiTransactionId, amount) {
 
 // ---- RAZORPAY ENDPOINTS ----
 app.post('/create-order', async (req, res) => {
-  const { name, email, phone, state, domain, amount = 10 } = req.body || {};
+  const { name, email, phone, state, domain, amount = 2000 } = req.body || {};
 
   if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
     return res.status(500).json({
@@ -240,7 +240,7 @@ app.post('/create-order', async (req, res) => {
     });
   }
 
-  const amountPaise = (Number(amount) || 10) * 100;
+  const amountPaise = (Number(amount) || 2000) * 100;
 
   try {
     const order = await razorpay.orders.create({
@@ -328,7 +328,7 @@ app.post('/verify-payment', async (req, res) => {
 // ---- ROUTES ----
 app.post('/upi-confirm', async (req, res) => {
   try {
-    const { name, email, amount = 10, upiTransactionId, state, domain, phone } = req.body || {};
+    const { name, email, amount = 2000, upiTransactionId, state, domain, phone } = req.body || {};
 
     if (!name || !email || !upiTransactionId) {
       return res.status(400).json({
@@ -338,7 +338,7 @@ app.post('/upi-confirm', async (req, res) => {
     }
 
     const adminUpiId = 'lwaran468-3@okhdfcbank';
-    const paidAmount = Number(amount) || 10;
+    const paidAmount = Number(amount) || 2000;
     const formattedAmount = `₹${paidAmount.toLocaleString('en-IN')}`;
 
     const paidAt = new Date().toLocaleString('en-IN', {

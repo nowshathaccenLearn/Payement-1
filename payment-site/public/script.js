@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const amount = 10;
+    const amount = 2000;
 
     if (typeof window.Razorpay !== 'function') {
       showMessage('Payment system is still loading. Please wait 2 seconds and try again.', 'error');
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = document.getElementById('payerState')?.value?.trim() || '';
     const domain = document.getElementById('payerDomain')?.value || '';
     const upiTxnId = document.getElementById('upiTxnId')?.value?.trim() || '';
-    const amount = 10;
+    const amount = 2000;
 
     // Manual UPI Transaction ID submit is deprecated when Razorpay is used.
     showMessage('Please use the Pay Now button to complete payment. Receipt will be emailed after confirmation.', 'error');
